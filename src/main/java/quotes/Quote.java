@@ -4,11 +4,13 @@ public class Quote {
 
     public String author;
     public String text;
+    public String[] tags;
 
-    public Quote (String author, String text) {
+    public Quote (String author, String text, String[] tags) {
 
         this.author = author;
         this.text = text;
+        this.tags = tags;
     }
 
 

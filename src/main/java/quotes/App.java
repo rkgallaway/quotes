@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 
 public class App {
@@ -15,16 +16,14 @@ public class App {
     public static void main(String[] args) throws FileNotFoundException {
 
         Gson gson = new Gson();
-        FileReader myFile = new FileReader("src/main.resources/quotes.json");
-        Quote[] quotesArray = gson.fromJson(myFile, Quote[].class);
+        FileReader myFile = new FileReader("src/main/resources/quotes.json");
+        ArrayList<Quote> quotes = gson.fromJson(myFile, new TypeToken<ArrayList<Quote>>(){}.getType());
 
-
-        getRandomQuote(quotesArray);
+        QuoteLibrary quoteLibrary = new QuoteLibrary(quotes);
+        if(args.length > 0) {
+            System.out.println(quoteLibrary.getRandomQuote(args[0]));
+        } else {
+            System.out.println(quoteLibrary.getRandomQuote());
+        }
     }
-
-    public static String getRandomQuote(Quote [] quotesArray){
-        int random = (int) (Math.random() * quotesArray.length);
-        return quotesArray[random].toString();
-    }
-
 }
